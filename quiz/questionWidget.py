@@ -109,26 +109,49 @@ class QuestionWidget(QtWidgets.QWidget):
         self.bt_back.pressed.connect(self.page_down)
         self.bt_forward.pressed.connect(self.page_up)
 
+    def show_question(self, img):
+        #self.label.setPixmap(QtGui.QPixmap(img))
+        #self.label.setScaledContents(True)
+        font = QtGui.QFont()
+        font.setPointSize(36)
+        self.label.setFont(font)
+        self.label.setText(settings.questions['questions'][settings.questionNumber-1]['question'])
+        self.add_start_bt()
+
+    def show_answer(self, img):
+        self.label.setPixmap(QtGui.QPixmap(img))
+        self.label.setScaledContents(True)
+        self.add_logo()
+
     def page_up(self):
         if settings.stageType == 'new_stage':
             settings.stage+=1
+            settings.question=1
+            settings.questionNumber+=1
             settings.changeStageEvent = True
         elif settings.question == 10:
             settings.stage+=1
+            settings.question=1
             settings.changeStageEvent = True
         else:
             settings.question+=1
+            settings.questionNumber+=1
             settings.changeQuestionEvent = True
 
     def page_down(self):
         if settings.stageType == 'new_stage':
             settings.stage-=1
+            settings.question=10
+            settings.questionNumber-=1
             settings.changeStageEvent = True
         elif settings.question == 0:
             settings.stage-=1
+            settings.question=10
+            settings.questionNumber-=1
             settings.changeStageEvent = True
         else:
             settings.question-=1
+            settings.questionNumber-=1
             settings.changeQuestionEvent = True
 
     def add_start_bt(self):
@@ -172,7 +195,7 @@ class QuestionWidget(QtWidgets.QWidget):
         self.central_widget.setSizePolicy(sizePolicy)
         self.central_widget.setMinimumSize(QtCore.QSize(180, 180))
         self.central_widget.setMaximumSize(QtCore.QSize(180, 180))
-        self.central_widget.setText("15")
+        self.central_widget.setText("30")
         font = QtGui.QFont()
         font.setPointSize(72)
         font.setBold(True)
@@ -216,7 +239,10 @@ class QuestionWidget(QtWidgets.QWidget):
 
     def start_timer_press(self):
         self.add_timer()
-        bot.send_message(2126527755, 'hi')
+        settings.startTimerEvent = True
+
+    def set_time(self):
+        self.central_widget.setText(f'{settings.timer}')
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

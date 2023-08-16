@@ -26,6 +26,7 @@ class RatingWidget(QtWidgets.QWidget):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
+        self.label.setStyleSheet("color: #ffffff")
         self.verticalLayout.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -102,18 +103,6 @@ class RatingWidget(QtWidgets.QWidget):
         self.verticalLayout_4.setContentsMargins(0, 0, 0, -1)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.label_7 = QtWidgets.QLabel(self.battery_frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_7.sizePolicy().hasHeightForWidth())
-        self.label_7.setSizePolicy(sizePolicy)
-        self.label_7.setMinimumSize(QtCore.QSize(0, 20))
-        self.label_7.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.label_7.setStyleSheet("")
-        self.label_7.setText("")
-        self.label_7.setObjectName("label_7")
-        self.verticalLayout_4.addWidget(self.label_7)
         spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem3)
         self.horizontalLayout.addWidget(self.battery_frame)
@@ -200,7 +189,7 @@ f"    background-color: {team_color};\n"
 "    border-bottom-width: 4px;\n"
 "    color: white;\n"
 "}")
-        self.verticalLayout_4.insertWidget(1, label)
+        self.verticalLayout_4.insertWidget(0, label)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

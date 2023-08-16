@@ -58,8 +58,10 @@ teamScore = 0
 teamNumber = 0
 teams = []
 
+finishEvent = False
 registration = True
 questionTime = False
+startTimerEvent = False
 timer = 30
 
 stage = 0
@@ -71,6 +73,8 @@ stages = ['menu', 'new_stage', 'question', 'rating',
 stageType = 'menu' #menu, question, new_stage, rating, finish
 changeStageEvent = False
 
+questions = {}
 question = 0
+questionNumber = 0
 questionType = 'close' #open
 changeQuestionEvent = False

@@ -9,18 +9,22 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QMainWindow, QApplication
+from challengeApp import ChallengeApp
+
 import settings
+import game
 
 
-class FinishPageWidget(QtWidgets.QWidget):
-    def __init__(self, *args, **kwargs):
-        super(FinishPageWidget, self).__init__(*args, **kwargs)
-        self.main_frame = QtWidgets.QFrame(self)
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.main_frame)
+class RatingApp(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(1920, 1080)
+        Form.setStyleSheet("background-color: #61b0ff;")
+        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.mainLayout = QtWidgets.QVBoxLayout(self)
-        self.mainLayout.setObjectName("mainLayout")
-        self.label = QtWidgets.QLabel()
+        self.label = QtWidgets.QLabel(Form)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -35,20 +39,21 @@ class FinishPageWidget(QtWidgets.QWidget):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
+        self.label.setStyleSheet("color: #ffffff;")
         self.verticalLayout.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.pushButton = QtWidgets.QPushButton()
-        self.pushButton.setMinimumSize(QtCore.QSize(700, 180))
+        self.action_widget = QtWidgets.QPushButton(Form)
+        self.action_widget.setMinimumSize(QtCore.QSize(700, 180))
         font = QtGui.QFont()
         font.setPointSize(36)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton.setFont(font)
-        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton.setStyleSheet("QPushButton{\n"
+        self.action_widget.setFont(font)
+        self.action_widget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.action_widget.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
 "    border-width: 10px;\n"
 "    border-color:  #0000bb;\n"
@@ -59,39 +64,45 @@ class FinishPageWidget(QtWidgets.QWidget):
 "QPushButton:pressed{\n"
 "    border-color: #0000ff;\n"
 "}")
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.action_widget.setObjectName("action_widget")
+        self.horizontalLayout.addWidget(self.action_widget)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.mainLayout.addWidget(self.main_frame)
 
-        self.retranslateUi(self)
-        QtCore.QMetaObject.connectSlotsByName(self)
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
         self.connect_funcions()
-        self.teams = 25
 
     def connect_funcions(self):
-        self.pushButton.pressed.connect(self.change_central_widget)
+        self.action_widget.pressed.connect(self.bt_pressed)
 
-    def change_central_widget(self):
-        self.mainLayout.removeWidget(self.main_frame)
-        self.main_frame = QtWidgets.QFrame()
+    def bt_pressed(self):
+        game.fill_rating()
         self.add_rating()
-        self.mainLayout.addWidget(self.main_frame)
+        self.fill_rating()
+        self.open_challengeApp()
+
+    def open_challengeApp(self):
+        import sys
+        self.MainWindow = QtWidgets.QWidget()
+        self.ui = ChallengeApp()
+        self.ui.setupUi(self.MainWindow)
+        self.MainWindow.setWindowState(Qt.WindowMaximized)
+        self.MainWindow.showFullScreen()
 
     def add_rating(self):
-        self.HL = QtWidgets.QHBoxLayout(self.main_frame)
-        self.battery_frame = QtWidgets.QFrame(self)
-        self.battery_frame.setMinimumSize(QtCore.QSize(800, 800))
-        self.battery_frame.setMaximumSize(QtCore.QSize(1000, 8000))
+        self.horizontalLayout.removeWidget(self.action_widget)
+        self.action_widget = QtWidgets.QFrame()
+        self.action_widget.setMinimumSize(QtCore.QSize(800, 800))
+        self.action_widget.setMaximumSize(QtCore.QSize(1000, 8000))
         font = QtGui.QFont()
         font.setPointSize(22)
         font.setBold(True)
         font.setWeight(75)
-        self.battery_frame.setFont(font)
-        self.battery_frame.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.battery_frame.setStyleSheet("QFrame{\n"
+        self.action_widget.setFont(font)
+        self.action_widget.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.action_widget.setStyleSheet("QFrame{\n"
 "    border-style: solid;\n"
 "    border-color: #ffffff;\n"
 "    border-width: 10px;\n"
@@ -103,41 +114,38 @@ class FinishPageWidget(QtWidgets.QWidget):
 "    border-width: 0px;\n"
 "    border-bottom-width: 4px;\n"
 "}")
-        self.battery_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.battery_frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.battery_frame.setObjectName("battery_frame")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.battery_frame)
+        self.action_widget.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.action_widget.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.action_widget.setObjectName("action_widget")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.action_widget)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, -1)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        spacerItem = QtWidgets.QPushButton()#QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(spacerItem.sizePolicy().hasHeightForWidth())
-        spacerItem.setStyleSheet("QPushButton{\n"
-"    border-style: solid;\n"
-"    border-width: 0px;\n"
-"    background-color: #61b0ff;\n"
-"    color: #000000;\n"
-"}\n"
-"QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
-"}")
-        spacerItem.pressed.connect(self.add_team_event)
-        spacerItem.setSizePolicy(sizePolicy)
-        self.verticalLayout_4.addWidget(spacerItem)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.HL.addItem(spacerItem1)
-        self.HL.addWidget(self.battery_frame)
-        self.HL.addItem(spacerItem1)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem)
+        self.horizontalLayout.insertWidget(1, self.action_widget)
+        self.fill_rating()
 
-    def add_team_event(self):
-        settings.popTeamEvent = True
+    def fill_rating(self):
+        self.clear_rating()
+        settings.rating.sort(key = lambda x: x[3])
+        for team in reversed(settings.rating):
+            index = len(settings.rating) - settings.rating.index(team)
+            self.add_team(index, team[1], team[2], team[3])
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem)
+
+    def clear_rating(self):
+        tmpItem = self.verticalLayout_4.itemAt(0)
+        while(tmpItem):
+            self.verticalLayout_4.removeItem(tmpItem)
+            self.verticalLayout_4.removeWidget(tmpItem.widget())
+            del tmpItem
+            tmpItem = self.verticalLayout_4.itemAt(0)
+        self.verticalLayout_4.update()
 
     def add_team(self, position, team_name, team_color, score):
-        label = QtWidgets.QLabel(self.battery_frame)
+        label = QtWidgets.QLabel(self.action_widget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -150,7 +158,7 @@ class FinishPageWidget(QtWidgets.QWidget):
         label.setMinimumSize(QtCore.QSize(0, 20))
         label.setMaximumSize(QtCore.QSize(16777215, 40))
         label.setAlignment(QtCore.Qt.AlignCenter)
-        label.setText(f"{position}. {team_name}\t {team_score}")
+        label.setText(f"{position}. {team_name}\t {score}")
         label.setStyleSheet("QLabel{\n"
 f"    background-color: {team_color};\n"
 "    border-style: solid;\n"
@@ -159,21 +167,20 @@ f"    background-color: {team_color};\n"
 "    border-bottom-width: 4px;\n"
 "    color: white;\n"
 "}")
-        self.verticalLayout_4.insertWidget(0, label)
-
+        self.verticalLayout_4.addWidget(label)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Итоговый рейтинг команд"))
-        self.pushButton.setText(_translate("Form", "Показать рейтинг команд"))
+        self.label.setText(_translate("Form", "Интеллектуальная игра"))
+        self.action_widget.setText(_translate("Form", "Начать игру"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = RatingApp()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
