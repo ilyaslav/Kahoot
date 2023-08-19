@@ -3,7 +3,6 @@ import settings
 
 def fill_rating():
 	settings.rating = jsonWriter.load_team_list()
-	print(settings.rating)
 	return settings.rating
 
 def find_team(name):

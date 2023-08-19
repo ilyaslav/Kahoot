@@ -34,7 +34,7 @@ class MainMenuWidget(QtWidgets.QWidget):
         self.battery_frame.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.battery_frame.setStyleSheet("QFrame{\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #0F1108;\n"
 "    border-width: 10px;\n"
 "}\n")
         self.battery_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -58,10 +58,10 @@ class MainMenuWidget(QtWidgets.QWidget):
         font.setWeight(75)
         self.label_32.setFont(font)
         self.label_32.setStyleSheet("QLabel{\n"
-"    color: #ffffff;\n"
+"    color: #0F1108;\n"
 "    background-color: rgba(0,0,0,0);\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #0F1108;\n"
 "    border-width: 0px;\n"
 "    border-bottom-width: 10px;\n"
 "}")
@@ -117,7 +117,7 @@ class MainMenuWidget(QtWidgets.QWidget):
 "{\n"
 "    border-style: solid;\n"
 "    border-width: 10px;\n"
-"    border-color:  #fea125;\n"
+"    border-color:  #92BCEA;\n"
 "    background-color: #ffffff;\n"
 "    border-radius: 79px;\n"
 "    color: #000000;\n"
@@ -127,16 +127,6 @@ class MainMenuWidget(QtWidgets.QWidget):
         self.logo_label.setScaledContents(True)
         self.logo_label.setObjectName("logo_label")
         self.horizontalLayout_3.addWidget(self.logo_label)
-        self.label_4 = QtWidgets.QLabel(self.frame_4)
-        font = QtGui.QFont()
-        font.setPointSize(36)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_4.setFont(font)
-        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_4.setObjectName("label_4")
-        self.label_4.setStyleSheet('color: white')
-        self.horizontalLayout_3.addWidget(self.label_4)
         self.horizontalLayout_4.addLayout(self.horizontalLayout_3)
         self.start_bt = QtWidgets.QPushButton(self.frame_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
@@ -153,14 +143,17 @@ class MainMenuWidget(QtWidgets.QWidget):
         self.start_bt.setFont(font)
         self.start_bt.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
-"    border-width: 10px;\n"
-"    border-color:  #0000bb;\n"
-"    background-color: #fea125;\n"
+"    border-width: 0px;\n"
+"    border-color:  #00CECB;\n"
+"    background-color: #92BCEA;\n"
 "    border-radius: 79px;\n"
 "    color: #000000;\n"
 "}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
+"}\n"
 "QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
+"    background-color: #334195;\n"
 "}")
         self.start_bt.setObjectName("start_bt")
         self.horizontalLayout_4.addWidget(self.start_bt)
@@ -197,7 +190,7 @@ class MainMenuWidget(QtWidgets.QWidget):
         label.setStyleSheet("QLabel{\n"
 f"    background-color: {team_color};\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #FFFFEA;\n"
 "    border-width: 0px;\n"
 "    border-bottom-width: 4px;\n"
 "    color: white;\n"
@@ -208,7 +201,6 @@ f"    background-color: {team_color};\n"
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_32.setText(_translate("Form", "Команды участники"))
-        self.label_4.setText(_translate("Form", "Сила внутри"))
         self.start_bt.setText(_translate("Form", "Начать игру"))
 
 

@@ -16,7 +16,7 @@ class ChallengeApp(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1924, 1080)
-        MainWindow.setStyleSheet("background-color: #61b0ff;")
+        MainWindow.setStyleSheet("background-color: #FFFFEA;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(MainWindow)
@@ -29,7 +29,7 @@ class ChallengeApp(object):
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
-        self.label.setStyleSheet("color: #ffffff;")
+        self.label.setStyleSheet("color: #0F1108;")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
@@ -45,7 +45,14 @@ class ChallengeApp(object):
         font.setWeight(75)
         self.frame.setFont(font)
         self.frame.setStyleSheet("QPushButton{\n"
-"    background-color: #fea125;\n"
+"    background-color: #92BCEA;\n"
+"    color: #000000;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
+"}\n"
+"QPushButton:pressed{\n"
+"    background-color: #334195;\n"
 "}")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -56,14 +63,33 @@ class ChallengeApp(object):
         self.teams.setMinimumSize(QtCore.QSize(800, 160))
         self.teams.setMaximumSize(QtCore.QSize(800, 160))
         font = QtGui.QFont()
-        font.setPointSize(60)
+        font.setPointSize(32)
         self.teams.setFont(font)
-        self.teams.setStyleSheet("QComboBox{\n"
-"    background-color: #ffffff;\n"
+        self.teams.setStyleSheet("QComboBox\n"
+"{\n"
+"    border-style: solid;\n"
+"    border-width: 3px;\n"
+"    border-color:  #0F1108;\n"
+"    background-color: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
+"    stop: 0 #C0D5EC, stop: 1 #FFFFEA);\n"
+"    border-radius: 8px;\n"
+"    padding-left: 20px;\n"
+"    combobox-popup: 0;\n"
 "}\n"
-"QComboBox::editable{\n"
-"    background-color: #ffffff;\n"
-"}")
+"\n"
+"QComboBox::drop-down \n"
+"{\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"    border: 0px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"  color: rgb(85, 170, 255);    \n"
+"  background-color: #373e4e;\n"
+"  padding: 10px;\n"
+"  selection-background-color: rgb(39, 44, 54);\n"
+"}\n")
         self.teams.setMaxVisibleItems(6)
         self.teams.setObjectName("teams")
         self.gridLayout.addWidget(self.teams, 0, 0, 1, 1)

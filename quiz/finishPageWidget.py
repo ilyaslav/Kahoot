@@ -35,7 +35,7 @@ class FinishPageWidget(QtWidgets.QWidget):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.label.setStyleSheet("color: #ffffff")
+        self.label.setStyleSheet("color: #0F1108")
         self.verticalLayout.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -51,14 +51,17 @@ class FinishPageWidget(QtWidgets.QWidget):
         self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
-"    border-width: 10px;\n"
+"    border-width: 0px;\n"
 "    border-color:  #0000bb;\n"
-"    background-color: #fea125;\n"
+"    background-color: #92BCEA;\n"
 "    border-radius: 90px;\n"
-"    color: #000000;\n"
+"    color: #0F1108;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
 "}\n"
 "QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
+"    background-color: #334195;\n"
 "}")
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
@@ -97,7 +100,7 @@ class FinishPageWidget(QtWidgets.QWidget):
         self.battery_frame.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.battery_frame.setStyleSheet("QFrame{\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #0F1108;\n"
 "    border-width: 10px;\n"
 "}\n"
 "QLabel{\n"
@@ -122,12 +125,9 @@ class FinishPageWidget(QtWidgets.QWidget):
         spacerItem.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
 "    border-width: 0px;\n"
-"    background-color: #61b0ff;\n"
-"    color: #000000;\n"
-"}\n"
-"QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
-"}")
+"    background-color: #ffffea;\n"
+"    color: #0F1108;\n"
+"}\n")
         spacerItem.pressed.connect(self.add_team_event)
         spacerItem.setSizePolicy(sizePolicy)
         self.verticalLayout_4.addWidget(spacerItem)

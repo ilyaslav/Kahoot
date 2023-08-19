@@ -23,9 +23,10 @@ class QuestionWidget(QtWidgets.QWidget):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
-        self.label.setPixmap(QtGui.QPixmap("img/33.png"))
+        self.label.setPixmap(QtGui.QPixmap("img/4.png"))
         self.label.setScaledContents(True)
         self.label.setStyleSheet("QLabel{\n"
+"    background-color: #ffffff;\n"
 "    border-style: solid;\n"
 "    border-color: #ffffff;\n"
 "    border-width: 10px;\n"
@@ -33,18 +34,21 @@ class QuestionWidget(QtWidgets.QWidget):
 "}")
         self.label.setText("")
         self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)   
         self.frame = QtWidgets.QFrame(self)
         self.frame.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
-"    border-width: 10px;\n"
+"    border-width: 0px;\n"
 "    border-color:  #0000bb;\n"
-"    background-color: #fea125;\n"
+"    background-color: #92BCEA;\n"
 "    border-radius: 90px;\n"
 "    color: #000000;\n"
 "}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
+"}\n"
 "QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
+"    background-color: #334195;\n"
 "}"
 "QFrame{background-color: rgba(255,255,255,0);}\n")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -69,6 +73,10 @@ class QuestionWidget(QtWidgets.QWidget):
         self.bt_back.setFont(font)
         self.bt_back.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bt_back.setStyleSheet("")
+        pixmap = QtGui.QPixmap("img/back.png")
+        ButtonIcon = QtGui.QIcon(pixmap)
+        self.bt_back.setIcon(ButtonIcon)
+        self.bt_back.setIconSize(pixmap.rect().size()/4)
         self.bt_back.setObjectName("bt_back")
         self.horizontalLayout.addWidget(self.bt_back)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -91,6 +99,10 @@ class QuestionWidget(QtWidgets.QWidget):
         font.setWeight(75)
         self.bt_forward.setFont(font)
         self.bt_forward.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        pixmap = QtGui.QPixmap("img/forward.png")
+        ButtonIcon = QtGui.QIcon(pixmap)
+        self.bt_forward.setIcon(ButtonIcon)
+        self.bt_forward.setIconSize(pixmap.rect().size()/4)
         self.bt_forward.setObjectName("bt_forward")
         self.horizontalLayout.addWidget(self.bt_forward)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -110,15 +122,15 @@ class QuestionWidget(QtWidgets.QWidget):
         self.bt_forward.pressed.connect(self.page_up)
 
     def show_question(self, img):
-        #self.label.setPixmap(QtGui.QPixmap(img))
-        #self.label.setScaledContents(True)
-        font = QtGui.QFont()
-        font.setPointSize(36)
-        self.label.setFont(font)
-        self.label.setText(settings.questions['questions'][settings.questionNumber-1]['question'])
-        self.add_start_bt()
+        self.label.setPixmap(QtGui.QPixmap(img))
+        self.label.setScaledContents(True)
 
     def show_answer(self, img):
+        self.label.setPixmap(QtGui.QPixmap(img))
+        self.label.setScaledContents(True)
+        self.add_logo()
+
+    def show_theme(self, img):
         self.label.setPixmap(QtGui.QPixmap(img))
         self.label.setScaledContents(True)
         self.add_logo()
@@ -164,7 +176,6 @@ class QuestionWidget(QtWidgets.QWidget):
         self.central_widget.setSizePolicy(sizePolicy)
         self.central_widget.setMinimumSize(QtCore.QSize(180, 180))
         self.central_widget.setMaximumSize(QtCore.QSize(180, 180))
-        self.central_widget.setText("Старт")
         font = QtGui.QFont()
         font.setPointSize(36)
         font.setBold(True)
@@ -173,15 +184,22 @@ class QuestionWidget(QtWidgets.QWidget):
         self.central_widget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.central_widget.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
-"    border-width: 10px;\n"
+"    border-width: 0px;\n"
 "    border-color:  #0000bb;\n"
-"    background-color: #fea125;\n"
+"    background-color: #92BCEA;\n"
 "    border-radius: 90px;\n"
 "    color: #000000;\n"
 "}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
+"}\n"
 "QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
+"    background-color: #334195;\n"
 "}")
+        pixmap = QtGui.QPixmap("img/timer.png")
+        ButtonIcon = QtGui.QIcon(pixmap)
+        self.central_widget.setIcon(ButtonIcon)
+        self.central_widget.setIconSize(pixmap.rect().size()/8)
         self.horizontalLayout.insertWidget(3,self.central_widget)
         self.central_widget.pressed.connect(self.start_timer_press)
 
@@ -205,7 +223,7 @@ class QuestionWidget(QtWidgets.QWidget):
 "{\n"
 "    border-style: solid;\n"
 "    border-width: 10px;\n"
-"    border-color:  #fea125;\n"
+"    border-color:  #92BCEA;\n"
 "    background-color: #ffffff;\n"
 "    border-radius: 90px;\n"
 "    color: #000000;\n"
@@ -230,7 +248,7 @@ class QuestionWidget(QtWidgets.QWidget):
 "{\n"
 "    border-style: solid;\n"
 "    border-width: 10px;\n"
-"    border-color:  #fea125;\n"
+"    border-color:  #92BCEA;\n"
 "    background-color: #ffffff;\n"
 "    border-radius: 90px;\n"
 "    color: #000000;\n"
@@ -247,9 +265,6 @@ class QuestionWidget(QtWidgets.QWidget):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.bt_back.setText(_translate("Form", "Назад"))
-        self.central_widget.setText(_translate("Form", "Старт"))
-        self.bt_forward.setText(_translate("Form", "Вперёд"))
 
 
 if __name__ == "__main__":

@@ -26,7 +26,7 @@ class RatingWidget(QtWidgets.QWidget):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.label.setStyleSheet("color: #ffffff")
+        self.label.setStyleSheet("color: #0F1108")
         self.verticalLayout.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -61,15 +61,22 @@ class RatingWidget(QtWidgets.QWidget):
         self.bt_back.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bt_back.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
-"    border-width: 10px;\n"
+"    border-width: 0px;\n"
 "    border-color:  #0000bb;\n"
-"    background-color: #fea125;\n"
+"    background-color: #92BCEA;\n"
 "    border-radius: 90px;\n"
 "    color: #000000;\n"
 "}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
+"}\n"
 "QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
+"    background-color: #334195;\n"
 "}")
+        pixmap = QtGui.QPixmap("img/back.png")
+        ButtonIcon = QtGui.QIcon(pixmap)
+        self.bt_back.setIcon(ButtonIcon)
+        self.bt_back.setIconSize(pixmap.rect().size()/4)
         self.bt_back.setObjectName("bt_back")
         self.verticalLayout_3.addWidget(self.bt_back)
         self.horizontalLayout.addWidget(self.frame_2)
@@ -86,7 +93,7 @@ class RatingWidget(QtWidgets.QWidget):
         self.battery_frame.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.battery_frame.setStyleSheet("QFrame{\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #0F1108;\n"
 "    border-width: 10px;\n"
 "}\n"
 "QLabel{\n"
@@ -134,15 +141,22 @@ class RatingWidget(QtWidgets.QWidget):
         self.bt_forward.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bt_forward.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
-"    border-width: 10px;\n"
+"    border-width: 0px;\n"
 "    border-color:  #0000bb;\n"
-"    background-color: #fea125;\n"
+"    background-color: #92BCEA;\n"
 "    border-radius: 90px;\n"
 "    color: #000000;\n"
 "}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
+"}\n"
 "QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
+"    background-color: #334195;\n"
 "}")
+        pixmap = QtGui.QPixmap("img/forward.png")
+        ButtonIcon = QtGui.QIcon(pixmap)
+        self.bt_forward.setIcon(ButtonIcon)
+        self.bt_forward.setIconSize(pixmap.rect().size()/4)
         self.bt_forward.setObjectName("bt_forward")
         self.verticalLayout_2.addWidget(self.bt_forward)
         self.horizontalLayout.addWidget(self.frame)
@@ -195,8 +209,6 @@ f"    background-color: {team_color};\n"
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Промежуточный рейтинг"))
-        self.bt_back.setText(_translate("Form", "Назад"))
-        self.bt_forward.setText(_translate("Form", "Вперёд"))
 
 
 if __name__ == "__main__":

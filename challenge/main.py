@@ -19,7 +19,17 @@ class MyApp(RatingApp):
 		self.thread.any_signal.connect(self.main_loop)
 
 	def main_loop(self):
+		self.start_event()
 		self.fill_event()
+
+	def start_event(self):
+		if settings.startEvent:
+			settings.startEvent = False
+			data = game.fill_rating()
+			if data:
+				self.add_rating()
+				self.fill_rating()
+				self.open_challengeApp()
 
 	def fill_event(self):
 		if settings.fillEvent:

@@ -14,14 +14,13 @@ from PyQt5.QtWidgets import QMainWindow, QApplication
 from challengeApp import ChallengeApp
 
 import settings
-import game
 
 
 class RatingApp(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1920, 1080)
-        Form.setStyleSheet("background-color: #61b0ff;")
+        Form.setStyleSheet("background-color: #FFFFEA;")
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(Form)
@@ -39,7 +38,7 @@ class RatingApp(object):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.label.setStyleSheet("color: #ffffff;")
+        self.label.setStyleSheet("color: #0F1108;")
         self.verticalLayout.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -55,14 +54,17 @@ class RatingApp(object):
         self.action_widget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.action_widget.setStyleSheet("QPushButton{\n"
 "    border-style: solid;\n"
-"    border-width: 10px;\n"
+"    border-width: 0px;\n"
 "    border-color:  #0000bb;\n"
-"    background-color: #fea125;\n"
+"    background-color: #92BCEA;\n"
 "    border-radius: 90px;\n"
 "    color: #000000;\n"
 "}\n"
+"QPushButton:hover{\n"
+"    background-color: #C0D5EC;\n"  
+"}\n"
 "QPushButton:pressed{\n"
-"    border-color: #0000ff;\n"
+"    background-color: #334195;\n"
 "}")
         self.action_widget.setObjectName("action_widget")
         self.horizontalLayout.addWidget(self.action_widget)
@@ -78,10 +80,7 @@ class RatingApp(object):
         self.action_widget.pressed.connect(self.bt_pressed)
 
     def bt_pressed(self):
-        game.fill_rating()
-        self.add_rating()
-        self.fill_rating()
-        self.open_challengeApp()
+        settings.startEvent = True
 
     def open_challengeApp(self):
         import sys
@@ -104,13 +103,13 @@ class RatingApp(object):
         self.action_widget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.action_widget.setStyleSheet("QFrame{\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #0F1108;\n"
 "    border-width: 10px;\n"
 "}\n"
 "QLabel{\n"
 "    background-color: red;\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #92BCEA;\n"
 "    border-width: 0px;\n"
 "    border-bottom-width: 4px;\n"
 "}")
@@ -162,7 +161,7 @@ class RatingApp(object):
         label.setStyleSheet("QLabel{\n"
 f"    background-color: {team_color};\n"
 "    border-style: solid;\n"
-"    border-color: #ffffff;\n"
+"    border-color: #FFFFEA;\n"
 "    border-width: 0px;\n"
 "    border-bottom-width: 4px;\n"
 "    color: white;\n"

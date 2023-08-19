@@ -31,7 +31,7 @@ def write():
     data['questions'].append({
         'id': 6,
         'question': 'Какая картинка верна?',
-        'answer': ['левый', 'левая', 'слева'],
+        'answer': ['правый', 'правая', 'справа'],
         'type': 'open'})
     data['questions'].append({
         'id': 7,
@@ -198,7 +198,7 @@ def write():
     data['questions'].append({
         'id': 39,
         'question': 'В каком веке ходили греки назад пятками?',
-        'answer': ['всегда', 'в любом', 'в любых'],
+        'answer': ['всегда', 'в любом', 'в любых', 'во всех', 'в любом веке', 'в любых веках', 'во всех веках'],
         'type': 'open'})
     data['questions'].append({
         'id': 40,

@@ -19,7 +19,7 @@ class MyApp(object):
 		font.setBold(True)
 		font.setWeight(75)
 		MainWindow.setFont(font)
-		MainWindow.setStyleSheet("background-color: #61b0ff;")
+		MainWindow.setStyleSheet("background-color: #ffffea;")
 		self.centralwidget = QtWidgets.QWidget(MainWindow)
 		self.centralwidget.setObjectName("centralwidget")
 		self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -55,12 +55,16 @@ class MyApp(object):
 			settings.changeQuestionEvent = False
 
 	def show_question(self):
-		img = f'img/question{settings.questionNumber}.png'
-		self.eventWidget.show_question('img/33.png')
+		img = f'img/q{settings.questionNumber}.png'
+		self.eventWidget.show_question(img)
 
 	def show_answer(self):
-		img = f'img/answer{settings.questionNumber}.png'
-		self.eventWidget.show_answer('img/111.png')
+		img = f'img/a{settings.questionNumber}.png'
+		self.eventWidget.show_answer(img)
+
+	def show_theme(self):
+		img = f'img/t{int(settings.questionNumber/10)+1}.png'
+		self.eventWidget.show_theme(img)
 
 	def change_stage(self):
 		if settings.changeStageEvent:
@@ -75,7 +79,7 @@ class MyApp(object):
 			elif settings.stageType == 'new_stage':
 				game.save_team_list()
 				self.eventWidget = QuestionWidget(self.centralwidget)
-				self.eventWidget.add_logo()
+				self.show_theme()
 			elif settings.stageType == 'rating':
 				self.eventWidget = RatingWidget(self.centralwidget)
 				game.get_rating()
