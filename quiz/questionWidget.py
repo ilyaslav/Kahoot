@@ -23,8 +23,6 @@ class QuestionWidget(QtWidgets.QWidget):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
-        self.label.setPixmap(QtGui.QPixmap("img/4.png"))
-        self.label.setScaledContents(True)
         self.label.setStyleSheet("QLabel{\n"
 "    background-color: #ffffff;\n"
 "    border-style: solid;\n"

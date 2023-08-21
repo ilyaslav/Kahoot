@@ -27,7 +27,7 @@ class FinishPageWidget(QtWidgets.QWidget):
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
         self.label.setMinimumSize(QtCore.QSize(0, 160))
-        self.label.setMaximumSize(QtCore.QSize(16777215, 160))
+        self.label.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setPointSize(60)
         font.setBold(True)
@@ -36,6 +36,8 @@ class FinishPageWidget(QtWidgets.QWidget):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.label.setStyleSheet("color: #0F1108")
+        self.label.setPixmap(QtGui.QPixmap("img/name.png"))
+        #self.label.setScaledContents(True)
         self.verticalLayout.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -169,7 +171,6 @@ f"    background-color: {team_color};\n"
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Итоговый рейтинг команд"))
         self.pushButton.setText(_translate("Form", "Показать рейтинг команд"))
 
 
