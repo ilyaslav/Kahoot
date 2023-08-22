@@ -9,13 +9,19 @@ from database import Database
 bot = telebot.TeleBot('5415524055:AAGHGAKYir7R-O1His9uLyTDksB_OXQ917k')
 db = Database('Kahoot.db')
 
+def send_message(chat_id, text, parse_mode = None, reply_markup = None):
+	try:
+		bot.send_message(chat_id, text, parse_mode = parse_mode, reply_markup = reply_markup)
+	except:
+		pass
+
 @bot.message_handler(commands=['start'])
 def start(message):
 	table_name = 'Teams'
 	if add_team(message.from_user.id):
-		bot.send_message(message.chat.id, f"Команда успешно зарегистрирована!\nВаша команда: {settings.teamName}!", parse_mode="html")
+		send_message(message.chat.id, f"Команда успешно зарегистрирована!\nВаша команда: {settings.teamName}!", parse_mode="html")
 	else:
-		bot.send_message(message.chat.id, f"Ваша команда: {db.get_team_name(table_name ,message.from_user.id)}!", parse_mode="html")
+		send_message(message.chat.id, f"Ваша команда: {db.get_team_name(table_name ,message.from_user.id)}!", parse_mode="html")
 
 @bot.message_handler(content_types="text")
 def message_answer(message):
@@ -25,9 +31,9 @@ def message_answer(message):
 			if db.get_answer(table_name, message.from_user.id):
 				check_answer(message)
 				db.set_answer(table_name, message.from_user.id, False)
-				bot.send_message(message.chat.id, f"Ответ принят!", parse_mode="html")
+				send_message(message.chat.id, f"Ответ принят!", parse_mode="html")
 			else:
-				bot.send_message(message.chat.id, f"Вы уже отправили ответ на этот вопрос!", parse_mode="html")
+				send_message(message.chat.id, f"Вы уже отправили ответ на этот вопрос!", parse_mode="html")
 
 def init_game():
 	db.clear_table('Teams')
@@ -36,11 +42,15 @@ def init_game():
 	settings.registration = True
 	bot.polling(non_stop="True")
 
+def set_color(user_id):
+	color = f'{user_id%1000000}'.rjust(6, '0')
+	return '#'+color
+
 def add_team(user_id):
 	table_name = 'Teams'
 	if not db.user_exists(table_name, user_id) and settings.registration:
 		settings.teamName = random_team()
-		settings.teamColor = f'#{user_id%1000000}'
+		settings.teamColor = set_color(user_id)
 		settings.teamScore = 0
 		settings.teamNumber+=1
 		db.add_team(table_name, user_id, settings.teamName, settings.teamColor, settings.teamScore, settings.questionTime)
@@ -55,20 +65,19 @@ def random_team():
 def send_question():
 	table_name = 'Teams'
 	user_ids = db.get_ids(table_name)
-	print(user_ids)
 	for user_id in user_ids:
 		for ID in user_id:
 			message = settings.questions['questions'][settings.questionNumber-1]['question']
 			if settings.questions['questions'][settings.questionNumber-1]['type'] == 'close':
-				marcup_reply = types.ReplyKeyboardMarkup(resize_keyboard = True, one_time_keyboard = True)
+				marcup_reply = types.ReplyKeyboardMarkup(resize_keyboard = True, row_width = 2, one_time_keyboard = True)
 				item_a = types.KeyboardButton('А')
 				item_b = types.KeyboardButton('Б')
 				item_c = types.KeyboardButton('В')
 				item_d = types.KeyboardButton('Г')
 				marcup_reply.add(item_a, item_b, item_c, item_d)
-				bot.send_message(ID, message, reply_markup = marcup_reply)
+				send_message(ID, message, reply_markup = marcup_reply)
 			else:
-				bot.send_message(ID, message)
+				send_message(ID, message)
 
 def set_all_answers(answer):
 	table_name = 'Teams'
